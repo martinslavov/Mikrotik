@@ -1,13 +1,14 @@
 #######################################
 ##   Automatically upgrade RouterOS  ##
-##  								 ##
-##									 ##
-##  script by Martin Slavov 		 ##
+##  							         	 ##
+##									          ##
+##     script by Martin Slavov 	    ##
+##                                   ##
 ##  m.slavov@linux-sys-adm.com		 ##
-##  created: 06-04-2016				 ##
+##  created: 06-04-2016				    ##
 ##  If you have use RouterOS version ##
 ##	until 6.31 you have to change 	 ##
-##	check for update code 	 		 ##
+##	check for update code 	 		    ##
 #######################################
 
 # You can configure this before and remove from this script
