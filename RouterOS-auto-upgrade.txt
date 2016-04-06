@@ -1,0 +1,55 @@
+#######################################
+##   Automatically upgrade RouterOS  ##
+##  								 ##
+##									 ##
+##  script by Martin Slavov 		 ##
+##  m.slavov@linux-sys-adm.com		 ##
+##  created: 06-04-2016				 ##
+##  If you have use RouterOS version ##
+##	until 6.31 you have to change 	 ##
+##	check for update code 	 		 ##
+#######################################
+
+# You can configure this before and remove from this script
+# Configure client to connect to gmail server
+/tool e-mail
+set address=173.194.77.108
+set port=587
+set start-tls=yes
+set from="Martin Slavov"
+set user="martin.slavov89"
+set password="yourpassword"
+
+# To move to the top level again, type " / " 
+/
+
+# Until 6.31
+#/system package update
+#check-for-updates
+#:delay 1s;
+#:if ( [get current-version] != [get latest-version]) do={ upgrade }
+
+# After 6.31
+# Check for update
+/system package update
+check-for-updates once
+
+# Waint 10 second for connections
+:delay 10s;
+
+# If new version is available and upgrades after upgrade command is executed
+:if ( [get status] = "New version is available") do={ 
+
+   ## New version of RouterOS available, let's upgrade
+   /tool e-mail send to="m.slavov@linux-sys-adm.com" subject="Upgrading RouterOS on router $[/system identity get name]" body="Upgrading RouterOS on router $[/system identity get name] from $[/system package update get installed-version] to $[/system package update get latest-version]"
+   /log info ("Upgrading RouterOS on router $[/system identity get name] from $[/system package update get installed-version] to $[/system package update get latest-version]")     
+
+   :delay 30s;
+   
+   install
+
+}  else={
+
+   /log info ("No Router upgrade found")
+
+   }
