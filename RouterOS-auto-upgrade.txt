@@ -41,7 +41,7 @@ check-for-updates once
 # If new version is available and upgrades after upgrade command is executed
 :if ( [get status] = "New version is available") do={ 
 
-   ## New version of RouterOS available, let's upgrade
+   # Sent mail
    /tool e-mail send to="m.slavov@linux-sys-adm.com" subject="Upgrading RouterOS on router $[/system identity get name]" body="Upgrading RouterOS on router $[/system identity get name] from $[/system package update get installed-version] to $[/system package update get latest-version]"
    /log info ("Upgrading RouterOS on router $[/system identity get name] from $[/system package update get installed-version] to $[/system package update get latest-version]")     
 
